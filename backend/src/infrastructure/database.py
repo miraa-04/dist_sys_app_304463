@@ -6,8 +6,8 @@ import os
 HOST = "localhost"
 PORT = "5432"
 USER = "postgres"
-PASSWORD = "123"
-DATABASE = "campus"
+PASSWORD = "miraa04"
+DATABASE = "001_university_ride"
 
 # Note the change to +asyncpg
 SQLALCHEMY_DATABASE_URL = os.getenv(

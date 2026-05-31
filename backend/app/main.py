@@ -15,11 +15,11 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(
-    title="Campus Ride API", 
+    title="Campus Ride API",
     version="0.2.0",
-    lifespan=lifespan
+    lifespan=lifespan,
+    swagger_ui_parameters={"syntaxHighlight": False}
 )
-
 # Add Middlewares
 app.add_middleware(LoggingMiddleware)
 app.add_middleware(SecurityMiddleware)
