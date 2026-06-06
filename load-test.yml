@@ -1,0 +1,33 @@
+config:
+  target: "https://distsysapp-production.up.railway.app"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+      name: "Phase 1 - Warm-up"
+    - duration: 120
+      arrivalRate: 50
+      name: "Phase 2 - Load Spike"
+  defaults:
+    headers:
+      Content-Type: "application/json"
+scenarios:
+  - name: "Health Check"
+    weight: 20
+    flow:
+      - get:
+          url: "/health"
+  - name: "Get Students"
+    weight: 40
+    flow:
+      - get:
+          url: "/api/v1/students/"
+  - name: "Get Drivers"
+    weight: 20
+    flow:
+      - get:
+          url: "/api/v1/drivers/"
+  - name: "Get Taxis"
+    weight: 20
+    flow:
+      - get:
+          url: "/api/v1/taxis/"
