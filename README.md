@@ -1,6 +1,6 @@
 # 🚖 Campus Ride — Distributed Computing Group Project
 
-> \*****STIJK2124 Distributed Computing | Universiti Utara Malaysia*****/
+> \*****STIJK2124 Distributed Computing | Universiti Utara Malaysia*****\
 > A real-time campus transportation platform built to demonstrate a full distributed systems stack — from local development to cloud deployment.
 
 \---
