@@ -472,11 +472,11 @@ Then redeploy: `railway up`
 
 ## 9\. Team Contributions
 
-|Member|Matric No.|Role|Parts|Contributions|
-|-|-|-|-|-|
-|**\[NUR AFRINA ATIQAH BINTI SHAHARUL ANUAR]**|\[304317]|Project Lead \& DevOps|3, 4, 5|Kubernetes manifests (k8s/), Railway deployment, CORS config, HPA setup, Minikube|
-|**\[NORAZMIRAH BINTI SULIMIN ]**|\[304008]|Backend Developer|6, 7|FastAPI endpoints, docker-compose, PostgreSQL schema, Docker backend|
-|**\[PUTRI NUR AMIRAH BINTI MOHD FITRY DAUD]**|\[304463]|Frontend Developer|1, 2, 8|Next.js frontend, Supabase JWT auth integration, UI components|
+| Member | Matric No. | Parts |
+|--------|-----------|-------|
+| **NUR AFRINA ATIQAH BINTI SHAHARUL ANUAR** (Leader) | 304317 | 3, 4, 5 |
+| **NORAZMIRAH BINTI SULIMIN** | 304008 | 6, 7 |
+| **PUTRI NUR AMIRAH BINTI MOHD FITRY DAUD** | 304463 | 1, 2, 8 |
 
 \---
 
