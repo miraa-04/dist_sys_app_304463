@@ -1,6 +1,6 @@
 # 🚖 Campus Ride — Distributed Computing Group Project
 
-> \\\*****STIJK2124 Distributed Computing | Universiti Utara Malaysia*****///
+> \*****STIJK2124 Distributed Computing | Universiti Utara Malaysia*****/
 > A real-time campus transportation platform built to demonstrate a full distributed systems stack — from local development to cloud deployment.
 
 \---
@@ -59,7 +59,7 @@
                       campus-backend        HPA: 2-10 pods      GitOps deploy
                       campus-postgres       CoreDNS discovery   Live metrics
 
-───────────────── DOCKER NETWORK (dist\\\_sys\\\_app\\\_default) ──────────
+───────────────── DOCKER NETWORK (dist_sys_app_default) ──────────
 
   Container           IP Address      Port    Role
   ──────────────────  ──────────────  ──────  ─────────────────
@@ -86,7 +86,7 @@
 |**Wireshark**|4.6.6|https://www.wireshark.org/download.html|
 |**Npcap**|Latest|https://npcap.com (install during Wireshark setup)|
 
-> \\\*\\\*Windows users:\\\*\\\* Install Npcap when prompted during Wireshark installation. This enables the \\\*\\\*Adapter for loopback traffic capture\\\*\\\* interface needed for Part 6.
+> Windows users: Install Npcap when prompted during Wireshark installation. This enables the Adapter for loopback traffic capture interface needed for Part 6.
 
 \---
 
@@ -96,13 +96,13 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/dist\\\_sys\\\_app.git
-cd dist\\\_sys\\\_app
+git clone https://github.com/your-org/dist_sys_app.git
+cd dist_sys_app
 
 # Backend setup (FastAPI on port 8000)
 cd backend
 python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\\\\Scripts\\\\activate
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 python server.py
 
@@ -127,11 +127,11 @@ Verify locally:
 #    Region: Southeast Asia (Singapore)
 
 # 2. Copy credentials to frontend/.env.local
-NEXT\\\_PUBLIC\\\_SUPABASE\\\_URL=https://your-project-id.supabase.co
-NEXT\\\_PUBLIC\\\_SUPABASE\\\_ANON\\\_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 
 # 3. Run migration in Supabase SQL Editor
-#    File: supabase/migrations/001\\\_university\\\_ride.sql
+#    File: supabase/migrations/001_university_ride.sql
 ```
 
 \---
@@ -148,7 +148,7 @@ docker ps
 # Expected: campus-frontend (3000), campus-postgres (5432)
 
 # Check container network
-docker network inspect dist\\\_sys\\\_app\\\_default
+docker network inspect dist_sys_app_default
 
 # View logs
 docker-compose logs -f
@@ -206,7 +206,7 @@ railway domain
 
 After deploying, add your Railway frontend URL to:
 
-1. `backend/app/main.py` → `allow\\\_origins` list (fixes CORS)
+1. `backend/app/main.py` → `allow_origins` list (fixes CORS)
 2. Supabase Dashboard → Authentication → URL Configuration → Redirect URLs
 
 **Live URLs:**
@@ -222,7 +222,7 @@ After deploying, add your Railway frontend URL to:
 # Make sure Docker containers are running
 docker ps
 
-# Exercise 6.1 \\\& 6.4 — TCP handshake and termination
+# Exercise 6.1 — TCP handshake and termination
 # Wireshark filter: tcp.flags.syn == 1
 curl https://distsysapp-production.up.railway.app/health
 
@@ -231,16 +231,14 @@ curl https://distsysapp-production.up.railway.app/health
 curl https://distsysapp-production.up.railway.app/api/v1/students/
 
 # Exercise 6.3 — HTTP POST with JSON
-curl -X POST https://distsysapp-production.up.railway.app/api/v1/students/ \\\\
-  -H "Content-Type: application/json" \\\\
-  -d "{\\\\"name\\\\":\\\\"Ali\\\\",\\\\"matric\\\_id\\\\":\\\\"S001\\\\",\\\\"email\\\\":\\\\"ali@uni.edu\\\\",\\\\"lat\\\\":6.45,\\\\"lng\\\\":100.50}"
-# Returns: {"name":"Ali","matric\\\_id":"S001","email":"ali@uni.edu","lat":6.45,"lng":100.5,"id":1}
+curl -X POST https://distsysapp-production.up.railway.app/api/v1/students/ -H "Content-Type: application/json" -d "{\"name\":\"Ali\",\"matric_id\":\"S001\",\"email\":\"ali@uni.edu\",\"lat\":6.45,\"lng\":100.50}"
+# Returns: {"name":"Ali","matric_id":"S001","email":"ali@uni.edu","lat":6.45,"lng":100.5,"id":1}
 
 # Exercise 6.4 — TCP termination
 # Wireshark filter: tcp.flags.fin == 1
 
 # Exercise 6.5 — Docker container IPs
-docker network inspect dist\\\_sys\\\_app\\\_default
+docker network inspect dist_sys_app_default
 docker inspect campus-frontend | findstr IPAddress
 docker inspect campus-postgres | findstr IPAddress
 
@@ -262,7 +260,7 @@ npm install -g artillery
 # Installed version: Artillery 2.0.32, Node.js v25.9.0
 
 # Run load test (3 minutes total)
-cd C:\\\\dist\\\_sys\\\_app
+cd C:\dist_sys_app
 artillery run load-test.yml
 
 # Generate HTML report
@@ -287,7 +285,7 @@ start report.json.html
 |Test duration|3 minutes 0 seconds|
 
 Railway CPU spike was clearly visible at 2:27 AM during Phase 2 (50 req/s).
-Network ingress spiked to \~1MB. Error rate stayed at **0.0%** throughout.
+Network ingress spiked to ~1MB. Error rate stayed at **0.0%** throughout.
 
 \---
 
@@ -295,13 +293,13 @@ Network ingress spiked to \~1MB. Error rate stayed at **0.0%** throughout.
 
 |Variable|Service|Description|Where to Get|
 |-|-|-|-|
-|`NEXT\\\_PUBLIC\\\_SUPABASE\\\_URL`|Frontend|Supabase project REST URL|Supabase → Settings → API → Project URL|
-|`NEXT\\\_PUBLIC\\\_SUPABASE\\\_ANON\\\_KEY`|Frontend|Public anon key|Supabase → Settings → API → anon public|
-|`DATABASE\\\_URL`|Backend|PostgreSQL connection string|Format: `postgresql+asyncpg://user:pass@host:5432/dbname`|
-|`SUPABASE\\\_SERVICE\\\_ROLE\\\_KEY`|Backend|Admin key for server-side auth|Supabase → Settings → API → service\_role|
-|`SECRET\\\_KEY`|Backend|JWT signing secret|Generate: `openssl rand -hex 32`|
-|`CORS\\\_ORIGINS`|Backend|Allowed frontend URLs|Railway frontend URL + http://localhost:3000|
-|`NEXT\\\_PUBLIC\\\_API\\\_URL`|Frontend|Backend base URL|Local: `http://localhost:8000` / Prod: Railway backend URL|
+|`NEXT_PUBLIC_SUPABASE_URL`|Frontend|Supabase project REST URL|Supabase → Settings → API → Project URL|
+|`NEXT_PUBLIC_SUPABASE_ANON_KEY`|Frontend|Public anon key|Supabase → Settings → API → anon public|
+|`DATABASE_URL`|Backend|PostgreSQL connection string|Format: `postgresql+asyncpg://user:pass@host:5432/dbname`|
+|`SUPABASE_SERVICE_ROLE_KEY`|Backend|Admin key for server-side auth|Supabase → Settings → API → service\_role|
+|`SECRET_KEY`|Backend|JWT signing secret|Generate: `openssl rand -hex 32`|
+|`CORS_ORIGINS`|Backend|Allowed frontend URLs|Railway frontend URL + http://localhost:3000|
+|`NEXT_PUBLIC_API_URL`|Frontend|Backend base URL|Local: `http://localhost:8000` / Prod: Railway backend URL|
 
 > ⚠️ Never commit `.env` or `.env.local` files to GitHub. Use `.env.example` with placeholder values only.
 
@@ -375,7 +373,7 @@ kubectl describe hpa campus-backend-hpa
 |`GET`|`/health`|Health probe — returns `{"status":"ok","database":"connected"}`|curl + Artillery|
 |`GET`|`/api/v1/students/`|List all students|curl + Artillery|
 |`POST`|`/api/v1/students/`|Create student — returns `{"id":1,...}`|curl Exercise 6.3|
-|`GET`|`/api/v1/students/{matric\\\_id}`|Get student by matric number|Swagger|
+|`GET`|`/api/v1/students/{matric_id}`|Get student by matric number|Swagger|
 |`GET`|`/api/v1/drivers/`|List all drivers|Artillery|
 |`POST`|`/api/v1/drivers/`|Register a driver|Swagger|
 |`GET`|`/api/v1/taxis/`|List taxis with location|Artillery|
@@ -401,17 +399,17 @@ curl https://distsysapp-production.up.railway.app/health
 
 \---
 
-### Issue 2: `docker network inspect campus-ride\\\_default` — network not found
+### Issue 2: `docker network inspect campus-ride_default` — network not found
 
-**Symptom:** `Error response from daemon: network campus-ride\\\_default not found`
+**Symptom:** `Error response from daemon: network campus-ride_default not found`
 
-**Cause:** Our docker-compose project is named `dist\\\_sys\\\_app`, so the network is named `dist\\\_sys\\\_app\\\_default`.
+**Cause:** Our docker-compose project is named `dist_sys_app`, so the network is named `dist_sys_app_default`.
 
 **Solution:**
 
 ```bash
 docker network ls
-docker network inspect dist\\\_sys\\\_app\\\_default
+docker network inspect dist_sys_app_default
 ```
 
 \---
@@ -447,10 +445,10 @@ artillery version
 
 **Symptom:** Browser console shows `Access to fetch blocked by CORS policy`
 
-**Solution:** Add your Railway frontend URL to `allow\\\_origins` in `backend/app/main.py`:
+**Solution:** Add your Railway frontend URL to `allow_origins` in `backend/app/main.py`:
 
 ```python
-allow\\\_origins = \\\[
+allow_origins = [
     "http://localhost:3000",
     "https://refreshing-connection-production-83d9.up.railway.app"
 ]
@@ -462,13 +460,13 @@ Then redeploy: `railway up`
 
 ### Issue 6: Supabase login redirect fails on Railway
 
-**Symptom:** Login redirects to wrong URL or shows redirect\_uri mismatch.
+**Symptom:** Login redirects to wrong URL or shows redirect_uri mismatch.
 
 **Solution:**
 
 1. Supabase Dashboard → Authentication → URL Configuration
 2. Set **Site URL**: `https://refreshing-connection-production-83d9.up.railway.app`
-3. Add **Redirect URL**: `https://refreshing-connection-production-83d9.up.railway.app/\\\*\\\*`
+3. Add **Redirect URL**: `https://refreshing-connection-production-83d9.up.railway.app`
 
 \---
 
@@ -480,14 +478,12 @@ Then redeploy: `railway up`
 |**\[NORAZMIRAH BINTI SULIMIN ]**|\[304008]|Backend Developer|1, 3|FastAPI endpoints, docker-compose, PostgreSQL schema, Docker backend|
 |**\[PUTRI NUR AMIRAH BINTI MOHD FITRY DAUD]**|\[304463]|Frontend Developer|1, 2|Next.js frontend, Supabase JWT auth integration, UI components|
 
-> Fill in actual names and matric numbers before submission.
-
 \---
 
 ## 📁 Project Structure
 
 ```
-dist\\\_sys\\\_app/
+dist_sys_app/
 ├── backend/
 │   ├── app/
 │   │   └── main.py              # FastAPI app, CORS config, all endpoints
@@ -507,7 +503,7 @@ dist\\\_sys\\\_app/
 │   └── hpa.yaml
 ├── supabase/
 │   └── migrations/
-│       └── 001\\\_university\\\_ride.sql
+│       └── 001_university_ride.sql
 ├── screenshots/                 # All evidence screenshots
 ├── docker-compose.yml
 ├── load-test.yml                # Artillery: Phase 1 (10 req/s) + Phase 2 (50 req/s)
